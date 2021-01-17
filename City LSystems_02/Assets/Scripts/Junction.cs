@@ -38,31 +38,18 @@ public class Junction : MonoBehaviour
         float mult = Random.Range(1,4);
         int rand = Random.Range(0, 2);
         if(rand == 0) { rand = -1; }
-        int mirror = 0;
-        //DO NOT MIRROR
-        if(mirror == 0)
-        {
-            transform.Translate(Vector3.up * rand * mult);
-            newEnd = transform.position;
-            stored = orig;
-        }
-        //MIRROR
-        else
-        {
+        
             transform.Translate(Vector3.up * rand * mult);
             stored = transform.position;
             transform.position = orig;
             transform.Translate(Vector3.up * -rand * mult);
             newEnd = transform.position;
-        }
 
         GameObject parent = GameObject.FindGameObjectWithTag("Parent");
         newRoad.GetComponent<Road>().transform.SetParent(parent.transform);
         newRoad.transform.localScale = new Vector3(1, 1, 1);
         newRoad.GetComponent<Road>().startPoint.transform.position = stored;
         newRoad.GetComponent<Road>().endPoint.transform.position = newEnd;
-        
-        //newRoad.GetComponent<Road>().generation = generation + 1;
         newRoad.GetComponent<Road>().housesPopulated = false;
     }
 }

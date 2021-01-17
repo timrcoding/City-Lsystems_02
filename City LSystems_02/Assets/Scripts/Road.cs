@@ -39,10 +39,11 @@ public class Road : MonoBehaviour
     public void setRoad()
     {
         roadAngle = returnAngle(startPoint.transform.position, endPoint.transform.position);
-        //transform.Rotate(0, 0, roadAngle);
         checkForNearnessToOtherRoads();
-        GetComponent<LineRenderer>().SetPosition(0, new Vector3(startPoint.transform.position.x, startPoint.transform.position.y, 0));
-        GetComponent<LineRenderer>().SetPosition(1, new Vector3(endPoint.transform.position.x, endPoint.transform.position.y, 0));
+        Vector3 s = startPoint.transform.position;
+        Vector3 e = endPoint.transform.position;
+        GetComponent<LineRenderer>().SetPosition(0, new Vector3(s.x, s.y, 0));
+        GetComponent<LineRenderer>().SetPosition(1, new Vector3(e.x, e.y, 0));
         float dist = Vector2.Distance(startPoint.transform.position, endPoint.transform.position);
         float clamped = Mathf.Clamp(dist / 100, .025f, .075f);
         GetComponent<LineRenderer>().startWidth = clamped;
